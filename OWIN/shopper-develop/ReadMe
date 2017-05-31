@@ -2,5 +2,5 @@ Taken from exiting OWIN examples and integrated into Service Fabric.
 
 API services (console apps) deployable to Service Fabric and able to run/debug locally. 
 
-1) To run API projects locally configure VS to start all api projects on startup
+1) To run API projects locally configure VS to run all api projects on startup
 2) To run in Service Fabric deploy all Guest SF projects to your cluster. NOTE this currently only works in local clusters due to local dependancies on MSMQ and RavenDB
