@@ -1,0 +1,1 @@
+C:\Development\DotNetCoreActore\DotNetCoreActore\obj\x64\Debug\DotNetCoreActore.sfprojResolveAssemblyReference.cache

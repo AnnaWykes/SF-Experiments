@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    <style>
+        .top-buffer {
+            padding-top: 10px;
+        }
+
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+            height: 100px;
+        }
+
+        .no-margin {
+            margin: unset;
+        }
+    </style>
+</head>
+<body onload="navTab(); handleEnter()">
+    <!-- Content -->
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="panel panel-success" id="statusPanel">
+                <div class="panel-heading" id="statusPanelHeading">
+                    HTTP Status Code
+                </div>
+                <div class="panel-body" id="statusPanelBody">Information</div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

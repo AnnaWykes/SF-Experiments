@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="DotNetCoreActoreType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Parameters>
+    <Parameter Name="MyStatelessService_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="MyStatefulService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="MyStatefulService_PartitionCount" DefaultValue="1" />
+    <Parameter Name="MyStatefulService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="MyWebSite_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="MyActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="MyActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="MyActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="WebService_ActorBackendServiceName" DefaultValue="MyActorService" />
+    <Parameter Name="ProductsActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="ProductsActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ProductsActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <!--<Parameter Name="GetProductsActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="GetProductsActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="GetProductsActorService_TargetReplicaSetSize" DefaultValue="3" />-->
+  </Parameters>
+  <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
+       should match the Name and Version attributes of the ServiceManifest element defined in the 
+       ServiceManifest.xml file. -->
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="MyStatelessServicePkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="MyStatefulServicePkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="ProductsActorPkg" ServiceManifestVersion="1.0.0" />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="MyWebSitePkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides>
+      <ConfigOverride Name="Config">
+        <Settings>
+          <Section Name="MyConfigSection">
+            <Parameter Name="ActorBackendServiceName" Value="[WebService_ActorBackendServiceName]" />
+          </Section>
+        </Settings>
+      </ConfigOverride>
+    </ConfigOverrides>
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="ActorBackendServicePkg" ServiceManifestVersion="1.0.0" />
+  </ServiceManifestImport>
+  <DefaultServices>
+    <!-- The section below creates instances of service types, when an instance of this 
+         application type is created. You can also create one or more instances of service type using the 
+         ServiceFabric PowerShell module.
+         
+         The attribute ServiceTypeName below must match the name defined in the imported ServiceManifest.xml file. -->
+    <Service Name="MyStatelessService">
+      <StatelessService ServiceTypeName="MyStatelessServiceType" InstanceCount="[MyStatelessService_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
+    <Service Name="MyStatefulService">
+      <StatefulService ServiceTypeName="MyStatefulServiceType" TargetReplicaSetSize="[MyStatefulService_TargetReplicaSetSize]" MinReplicaSetSize="[MyStatefulService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[MyStatefulService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+    <Service Name="MyWebSite">
+      <StatelessService ServiceTypeName="MyWebSiteType" InstanceCount="[MyWebSite_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
+    <Service Name="MyActorService" GeneratedIdRef="abdc1642-d9be-4428-a48a-ce5db03c2940|Persisted">
+      <StatefulService ServiceTypeName="MyActorServiceType" TargetReplicaSetSize="[MyActorService_TargetReplicaSetSize]" MinReplicaSetSize="[MyActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[MyActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+    <Service Name="ProductsActorService" GeneratedIdRef="d11f9055-666c-46dd-b734-1cc452e021c5|Persisted">
+      <StatefulService ServiceTypeName="ProductsActorServiceType" TargetReplicaSetSize="[ProductsActorService_TargetReplicaSetSize]" MinReplicaSetSize="[ProductsActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[ProductsActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+  </DefaultServices>
+</ApplicationManifest>

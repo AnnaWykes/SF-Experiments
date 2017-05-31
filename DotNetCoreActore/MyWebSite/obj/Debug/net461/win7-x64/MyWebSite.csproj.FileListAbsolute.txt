@@ -1,0 +1,6 @@
+C:\Development\DotNetCoreActore\MyWebSite\bin\Debug\net461\win7-x64\MyWebSite.deps.json
+C:\Development\DotNetCoreActore\MyWebSite\bin\Debug\net461\win7-x64\MyWebSite.runtimeconfig.json
+C:\Development\DotNetCoreActore\MyWebSite\bin\Debug\net461\win7-x64\MyWebSite.runtimeconfig.dev.json
+C:\Development\DotNetCoreActore\MyWebSite\obj\Debug\net461\win7-x64\MyWebSite.csprojResolveAssemblyReference.cache
+C:\Development\DotNetCoreActore\MyWebSite\obj\Debug\net461\win7-x64\MyWebSite.csproj.MyWebSite.exe.config
+C:\Development\DotNetCoreActore\MyWebSite\obj\Debug\net461\win7-x64\MyWebSite.AssemblyInfo.cs
