@@ -1,0 +1,27 @@
+﻿@{
+    ViewData[ "Title" ] = "Home Page";
+}
+
+<div class="jumbotron">
+    @await Component.InvokeAsync("Marketing.ViewComponents.HomeHeadlineItemDescription", Model.HeadlineProduct)
+    @await Component.InvokeAsync("Sales.ViewComponents.ItemPrice", Model.HeadlineProduct)
+    @await Component.InvokeAsync("Shipping.ViewComponents.ItemShippingInfo", Model.HeadlineProduct)
+    @await Component.InvokeAsync("CustomerCare.ViewComponents.ItemRating", Model.HeadlineProduct)
+</div>
+
+<div class="row">
+    @{
+        var howMany = 12 / Model.ShowcaseProducts.Count;
+        foreach(var item in Model.ShowcaseProducts)
+        {
+            <div class="col-md-@howMany">
+                <div class="jumbotron">
+                    @await Component.InvokeAsync("Marketing.ViewComponents.HomeShowcaseItemDescription", item)
+                    @await Component.InvokeAsync("Sales.ViewComponents.ItemPrice", item)
+                    @await Component.InvokeAsync("Shipping.ViewComponents.ItemShippingInfo", item)
+                    @await Component.InvokeAsync("CustomerCare.ViewComponents.ItemRating", item)
+                </div>
+            </div>
+        }
+    }
+</div>
